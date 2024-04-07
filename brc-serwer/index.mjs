@@ -1,7 +1,10 @@
 import express from "express";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
+
+app.use(bodyParser.text({type: '*/*'}));
 
 app.get('/', (req,res) => {
     res.send("działa");
@@ -32,14 +35,13 @@ app.get('/leds', (req,res) => {
         res.body += String(leds[i].r).padStart(3, '0')+String(leds[i].g).padStart(3, '0')+String(leds[i].b).padStart(3, '0')+String(leds[i].br).padStart(3, '0');
         
     }
-    console.log(res.body.length)
+    //console.log(res.body.length)
     res.setHeader('content-type','text/html');
     res.send(res.body);
 });
 
 app.post('/sensors', (req,res) => {
     console.log(req.body);
-    res.send(req.body)
 })
 
 app.listen(port, () => {
