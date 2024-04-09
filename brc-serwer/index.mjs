@@ -2,10 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 
 const app = express();
-const port = 3000;
+const port = 3001;
+let sensors = 0;
 
 app.use(bodyParser.text({type: '*/*'}));
 
+//do srarduino
 app.get('/', (req,res) => {
     res.send("działa");
 })
@@ -35,13 +37,22 @@ app.get('/leds', (req,res) => {
         res.body += String(leds[i].r).padStart(3, '0')+String(leds[i].g).padStart(3, '0')+String(leds[i].b).padStart(3, '0')+String(leds[i].br).padStart(3, '0');
         
     }
-    //console.log(res.body.length)
+    console.log(res.body)
     res.setHeader('content-type','text/html');
     res.send(res.body);
 });
 
 app.post('/sensors', (req,res) => {
-    console.log(req.body);
+    sensors = req.body;
+})
+
+
+//do frontu
+app.get('/sensors', (req, res) => {
+    //res.setHeader('content-type', 'text/plain');
+    res.body = sensors;
+    res.send(sensors);
+    console.log(res.body);
 })
 
 app.listen(port, () => {
