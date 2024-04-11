@@ -21,6 +21,10 @@ function Header() {
         <Link to="/leds" className="nav-link nav-point" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
                             aria-controls="pills-home" aria-selected="true">Leds</Link>
         </li>
+        <li className="nav-item" role="presentation">
+        <Link to="/login" className="nav-link nav-point" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            aria-controls="pills-home" aria-selected="true">Login</Link>
+        </li>
 
        <div className="clear-float"></div>
     </ul>

@@ -7,6 +7,7 @@ import SensorsView from './components/SensorsView';
 import LedsView from './components/LedsView';
 import NotFound from './components/NotFound';
 import HomeView from './components/HomeView';
+import Login from './components/Login';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path='/' element={<HomeView/>}/>
             <Route path='/sensors' element={<SensorsView/>}/>
             <Route path='/leds' element={<LedsView/>} />
+            <Route path='/login' element={<Login />} />
 
             <Route path='/notFound' element={<NotFound/>}/>
             <Route path="*" element={<Navigate to ="/notFound" />}/>
