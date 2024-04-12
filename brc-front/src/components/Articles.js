@@ -18,10 +18,10 @@ const Articles = () => {
   const [temps, setTemps] = useState(undefined);
   const [solar, setSolar] = useState(undefined);
 
-  const [color0, setColor0] = useState(undefined);
-  const [color1, setColor1] = useState(undefined);
-  const [color2, setColor2] = useState(undefined);
-  const [color3, setColor3] = useState(undefined);
+  const [color0, setColor0] = useState({r:0, g:0, b:0, a:0});
+  const [color1, setColor1] = useState({r:0, g:0, b:0, a:0});
+  const [color2, setColor2] = useState({r:0, g:0, b:0, a:0});
+  const [color3, setColor3] = useState({r:0, g:0, b:0, a:0});
 
 
   const convertLeds = (num) => {
@@ -55,6 +55,8 @@ const Articles = () => {
       setTemps(null);
     }
   };
+
+
   const getLeds = async () => {
     try {
       const response = await authedGet('/api/content/leds');
@@ -91,31 +93,21 @@ const handleChange2 = (color: RgbaColor) => {
 };
 
 const handleChange3 = (color: RgbaColor) => {
-  console.log(color);
   setColor3(color);
 };
 
 
   const setLeds = async () => {
 
-    console.log(color0)
-    console.log(color1)
-    console.log(color2)
-    console.log(color3)
+
     try {
 
+      let arr = [color0, color1, color2, color3];
 
+      const response = await authedPost('/api/content/leds', arr);
 
-      return
-
-
-      const response = await authedPost('/api/content/leds');
-      if(response === null)
-        throw 'error'
 
       //console.log(await response.json());
-
-      const res = await response.text();
 
 
       //setTemps(res.temps);
@@ -124,13 +116,6 @@ const handleChange3 = (color: RgbaColor) => {
     }
   };
 
-
-  useEffect(() => {
-
-    getSensors();
-    getLeds();
-
-  }, []);
 
 
   useEffect(() => {
@@ -141,7 +126,8 @@ const handleChange3 = (color: RgbaColor) => {
       await getLeds();
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [setLeds]);
+
 
   const styles = useStyles();
 
@@ -175,7 +161,7 @@ const handleChange3 = (color: RgbaColor) => {
               :
               <h2>{temps[0].name}</h2>
           }
-          <RgbaColorPicker color={color0} onChange={handleChange0} style={{width: "40%", height: "50%" }}/>
+          <RgbaColorPicker color={color0} onChange={setColor0} style={{width: "40%", height: "50%" }}/>
           {
             temps===undefined||temps===null?
               <h2>...</h2>
@@ -194,7 +180,7 @@ const handleChange3 = (color: RgbaColor) => {
               :
               <h2>{temps[1].name}</h2>
           }
-          <RgbaColorPicker color={color1} onChange={handleChange1} style={{width: "40%", height: "50%" }}/>
+          <RgbaColorPicker color={color1} onChange={setColor1} style={{width: "40%", height: "50%" }}/>
           {
             temps===undefined||temps===null?
               <h2>...</h2>
@@ -216,7 +202,7 @@ const handleChange3 = (color: RgbaColor) => {
               :
               <h2>{temps[2].name}</h2>
           }
-          <RgbaColorPicker color={color2} onChange={handleChange2} style={{width: "40%", height: "50%" }}/>
+          <RgbaColorPicker color={color2} onChange={setColor2} style={{width: "40%", height: "50%" }}/>
           {
             temps===undefined||temps===null?
               <h2>...</h2>
@@ -236,7 +222,7 @@ const handleChange3 = (color: RgbaColor) => {
               <h2>{temps[3].name}</h2>
           }
 
-          <RgbaColorPicker color={color3} onChange={handleChange3}/>
+          <RgbaColorPicker color={color3} onChange={setColor3}/>
           {
             temps===undefined||temps===null?
               <h2>...</h2>
