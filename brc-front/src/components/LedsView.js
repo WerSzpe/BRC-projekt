@@ -3,6 +3,8 @@ import Header from './Header';
 import ColorPicker from './ColorPicker';
 import "./LedsView.css";
 
+import { useAuth } from './AuthContext';
+
 //zwraca do rgba ładne 255, 255, 255, 255
 const convertLeds = (num) => {
   
@@ -31,6 +33,8 @@ function LedsView() {
   const [color4, setColor4] = React.useState("rgba(0,255,255,255)");
   let prettyLeds = [];
 
+  const {authedLeds} = useAuth();
+
   React.useEffect(() => {
     const handleFetchLeds = async () => {
 
@@ -56,7 +60,14 @@ function LedsView() {
 
   //sending to esp
   const handleClick = async () => {
-
+    try {
+      const res = await fetch('api/content/leds', {method:"POST"});
+      if (res === null) {
+        throw new Error("error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if(currentLeds.length !== 0) {
@@ -68,9 +79,9 @@ function LedsView() {
       <Header />
       <div className='container'>
         <div className='dom'>
-
+        
         <div className='pokoje'>
-
+          <div> Current leds: {prettyLeds}</div>
           <div className='p1'>
             <p>Room 1</p> 
             <p>{color1}</p>
