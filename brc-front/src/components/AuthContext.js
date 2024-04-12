@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
   const unAuthedGet = async (path) => {
     try {
-      const res = await fetch(`http://localhost:3001${path}`, {
+      const res = await fetch(document.location.origin+path, {
           method: "GET",
           headers: {"Content-Type": "application/json"},
           credentials: "include"
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
 
     const unAuthedPost = async (path, body) => {
       try{
-        const result = await fetch(`http://localhost:3001${path}`, {
+        const result = await fetch(document.location.origin+path, {
           method: 'POST',
           body: JSON.stringify(body),
           headers: { 'Content-Type': 'application/json' },
@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const authedGet =  async (path) => {
     try {
-      const res = await fetch(`http://localhost:3001${path}`, {
+      const res = await fetch(document.location.origin+path, {
           method: "GET",
           headers: {"Content-Type": "application/json"},
           credentials: "include"
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     }
     catch (error){
       await triggerUpdate();
-      const res = await fetch(`http://localhost:3001${path}`, {
+      const res = await fetch(document.location.origin+path, {
           method: "GET",
           headers: {"Content-Type": "application/json"},
           credentials: "include"
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
 
   const triggerUpdate = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/auth/whoami', {
+      const res = await fetch(document.location.origin+'/api/auth/whoami', {
           method: "GET",
           headers: {"Content-Type": "application/json"},
           credentials: "include"
@@ -92,7 +92,7 @@ const AuthProvider = ({ children }) => {
 
   const authedPost = async(path, body) => {
     try{
-      const result = await fetch(`http://localhost:3001${path}`, {
+      const result = await fetch(document.location.origin+path, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' },
@@ -106,7 +106,7 @@ const AuthProvider = ({ children }) => {
     }
     catch(error){
       await triggerUpdate();
-      const result = await fetch(`http://localhost:3001${path}`, {
+      const result = await fetch(document.location.origin+path, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' },

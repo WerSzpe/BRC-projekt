@@ -10,7 +10,7 @@ function Header() {
             <span className="app-title">HomeHome</span>
         </li>
         <li className="nav-item" role="presentation">
-          <Link to="/" className="nav-link nav-point" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+          <Link to="/home" className="nav-link nav-point" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
                             aria-controls="pills-home" aria-selected="true">Home</Link>
         </li>
         <li className="nav-item" role="presentation">

@@ -34,7 +34,7 @@ function LedsView() {
   React.useEffect(() => {
     const handleFetchLeds = async () => {
 
-      const res = await fetch('leds', {method: "GET"});
+      const res = await fetch('api/content/leds', {method: "GET"});
 
       if(!res.ok) {
         setCurrentLeds(0);
@@ -52,7 +52,12 @@ function LedsView() {
 
     return () => clearInterval(timer);
     
-  }, [])
+  }, []);
+
+  //sending to esp
+  const handleClick = async () => {
+
+  }
 
   if(currentLeds.length !== 0) {
     prettyLeds = convertLeds(currentLeds);
@@ -66,19 +71,28 @@ function LedsView() {
 
         <div className='pokoje'>
 
-          <div className='p1'> 
+          <div className='p1'>
+            <p>Room 1</p> 
+            <p>{color1}</p>
             <ColorPicker color={color1} onChange={setColor1}/>
+            <button className="btn btn-secondary" onClick={handleClick}>Send to home</button>
 
           </div>
-          <div className='p2'> Pokój 2
+          <div className='p2'>
+            <p>Room 2</p>
+            <p>{color2}</p>
             <ColorPicker color={color2} onChange={setColor2}/>
 
           </div>
-          <div className='p3'> Kuchnia
+          <div className='p3'>
+            <p>Room 3</p>
+            <p>{color3}</p>
             <ColorPicker color={color3} onChange={setColor3}/>
 
           </div>
-          <div className='p4'> Łazienka
+          <div className='p4'>
+            <p>Room 4</p>
+            <p>{color4}</p>
             <ColorPicker color={color4} onChange={setColor4}/>
             
           </div>

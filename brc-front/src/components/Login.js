@@ -26,19 +26,21 @@ const Login = (props) => {
     };
 
     return(
-        <div>
+        <div className=''>
             <Header />
-            <div>
+            <div className='login-box-outside'>
+
+            <div className='title'>
                 Log in to your account!
             </div>
 
-            <div>
-                <div>
+            <div className='login-box-inside'>
+                <div className='label-box'>
                     <label htmlFor="username" >
                         Username
                     </label>
                 </div>
-                <div >
+                <div className='input-box'>
                     <input
                     id="username"
                     name="username"
@@ -48,12 +50,12 @@ const Login = (props) => {
                     />
                 </div>
 
-                <div>
+                <div className='label-box'>
                     <label htmlFor="password" >
                        Password
                     </label>
                 </div>
-                <div >
+                <div className='input-box'>
                     <input
                     id="password"
                     name="password"
@@ -64,15 +66,16 @@ const Login = (props) => {
                     value={password} onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className='btn-box'>
                     <button
                         onClick={handleLogin}
-                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="btn btn-primary"
                     >
                         Sign in
                     </button>
                 </div>
 
+            </div>
             </div>
         </div>
     )

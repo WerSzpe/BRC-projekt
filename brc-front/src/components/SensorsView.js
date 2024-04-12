@@ -23,7 +23,7 @@ function SensorsView() {
 
     React.useEffect(() => {
         const handleFetchSensors = async () => {
-            const res = await fetch('sensors', {method: 'GET'});
+            const res = await fetch('api/content/sensors', {method: 'GET'});
 
             if(!res.ok) {
                 setSensors(0);
